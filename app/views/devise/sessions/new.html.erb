@@ -1,0 +1,24 @@
+<div class="authentication">
+  <h2>Log in</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <% if flash.present? %>
+      <div class="text-danger mb-2"><%= flash.alert %></div>
+    <% end %>
+
+    <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "form-control" %>
+    <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "form-control mt-2"%>
+
+    <% if devise_mapping.rememberable? %>
+    <div class="checkbox mt-2">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <%= f.submit "Sign in", class: "btn btn-primary btn-block" %>
+
+    <h4 class="line-througn">OR</h4>
+    <%= link_to("Sign up", new_user_registration_path, class: "btn btn-info btn-block mt-2" ) %>
+  <% end %>
+</div>

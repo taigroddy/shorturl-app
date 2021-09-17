@@ -1,0 +1,29 @@
+<div class="col-md-12 links">
+  <h4 class="breadcrumbs">
+    Links Management 
+    <%= link_to 'New link', new_link_path %>
+  </h4>
+
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Original URL</th>
+        <th>Short URL</th>
+        <th>Created at</th>
+        <th>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @links.each do |link| %>
+        <tr>
+          <td><%= link.name %></td>
+          <td><%= link.original_url %></td>
+          <td><%= link.short_url %></td>
+          <td><%= link.created_at %></td>
+          <td><%= generate_actions(link) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  app:
+    image: shorturl-app
+    container_name: shorturl-app
+    build: .
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/app
+      - ./Gemfile:/app/Gemfile
+      - ./Gemfile.lock:/app/Gemfile.lock
+      - ./package.json:/app/package.json
+      - cache:/cache
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3004:3000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=shorturl_app_db
+      - DATABASE_USERNAME=shorturl_app_db
+      - DATABASE_PASSWORD=shorturl_app_db
+      - RACK_ENV=development
+      - RAILS_ENV=development
+      - REDIS_HOST=redis
+      - SPROCKETS_CACHE=/cache
+      - SHARE_SECRET_KEY=tai-chau
+      - BUNDLE_PATH=./vendor/bundle
+    labels:
+      - "traefik.docker.network=traefik_proxy"
+      - "traefik.enable=true"
+      - "traefik.backend=app"
+      - "traefik.port=3000"
+      - "traefik.frontend.entryPoints=http,https"
+      - "traefik.frontend.rule=Host:shorturl-app.local.dev;PathPrefix:/"
+      - "traefik.tags=app"
+    networks:
+      - traefik
+  
+  db:
+    image: bitnami/mongodb
+    container_name: shorturl-app-db
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_USERNAME=shorturl_app_db
+      - MONGODB_PASSWORD=shorturl_app_db
+      - MONGODB_DATABASE=shorturl_app_db
+    ports:
+      - 27017:27017
+    networks:
+      - traefik
+  
+networks:
+  traefik:
+    external:
+      name: traefik_proxy
+
+volumes:
+  cache:
+
+

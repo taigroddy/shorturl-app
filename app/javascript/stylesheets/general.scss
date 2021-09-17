@@ -1,0 +1,44 @@
+body {
+  background: #dcdcdc;
+  
+  #error_explanation {
+    * {
+      color: red;
+      font-size: 14px;
+      text-align: left;
+    }
+    ul {
+      padding-left: 16px;
+    }
+  }
+
+  .container {
+    .row > div {
+      background: white;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  }
+  
+  .line-througn {
+    margin: 10px 0px;
+    font-size: 18px;
+    position: relative;
+    &::before {
+        content: '';
+        border: 1px solid #bfbfbf;
+        width: 30%;
+        position: absolute;
+        top: calc(50% - 1px);
+        left: 0px;
+    }
+    &::after {
+        content: '';
+        border: 1px solid #bfbfbf;
+        width: 30%;
+        position: absolute;
+        top: calc(50% - 1px);
+        right: 0px;
+    }
+  }
+}
