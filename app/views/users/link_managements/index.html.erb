@@ -1,8 +1,11 @@
 <div class="col-md-12 links">
   <h4 class="breadcrumbs">
     Links Management 
+    <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
     <%= link_to 'New link', new_link_path %>
   </h4>
+
+  <h6><%= current_user.api_key %></h6>
 
   <table class="table mt-3">
     <thead>
@@ -10,6 +13,7 @@
         <th>Name</th>
         <th>Original URL</th>
         <th>Short URL</th>
+        <th>Clicked</th>
         <th>Created at</th>
         <th>Action</td>
       </tr>
@@ -19,7 +23,8 @@
         <tr>
           <td><%= link.name %></td>
           <td><%= link.original_url %></td>
-          <td><%= link.short_url %></td>
+          <td><%= link_to link.short_url, link.short_url %></td>
+          <td><%= link.num_of_click %></td>
           <td><%= link.created_at %></td>
           <td><%= generate_actions(link) %></td>
         </tr>

@@ -1,4 +1,7 @@
 module Users
+  ##
+  # Users::LinkManagementsController
+  ##
   class LinkManagementsController < ApplicationController
     before_action :set_link, only: [:show, :edit, :update, :destroy]
 
@@ -8,7 +11,6 @@ module Users
 
     def show; end
 
-   
     def new
       @link = Link.new
     end
@@ -16,10 +18,10 @@ module Users
     def edit; end
 
     def create
-      @link = Link.new(link_params)
+      @link = Link.create(link_params)
 
       respond_to do |format|
-        if @link.save
+        if @link.errors.blank?
           format.html { redirect_to links_path, notice: "Link management was successfully created." }
           format.json { render :index, status: :ok, links: resources }
         else
@@ -47,6 +49,16 @@ module Users
         format.html { redirect_to links_url, notice: "Link management was successfully destroyed." }
         format.json { head :no_content }
       end
+    end
+
+    def redirect
+      @link = Link.find_by(short_path: params[:short_path])
+
+      @link.inc(num_of_click: 1)
+
+      redirect_to @link.original_url
+    rescue Mongoid::Errors::DocumentNotFound
+      raise ActionController::RoutingError.new('Not Found', 404)
     end
 
     private

@@ -29,10 +29,9 @@ gem 'mongoid', '~> 7.3', '>= 7.3.3'
 # Authenciation
 gem 'devise', '~> 4.8'
 
-# Dry suites gems
-gem 'dry-initializer', '~> 3.0'
-gem 'dry-transaction', '~> 0.13'
-gem 'dry-validation', '~> 1.6' 
+# Api serializer and pagination
+gem 'jsonapi-serializer', '~> 2.0'
+gem 'pagy', '~> 4.11'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

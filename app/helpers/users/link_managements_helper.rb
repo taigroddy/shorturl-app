@@ -1,6 +1,5 @@
 module Users
   module LinkManagementsHelper
-
     def generate_actions(resource)
       element = <<-HTML
       <div class="actions">

@@ -64,7 +64,7 @@ RSpec.describe "/users/link_managements", type: :request do
 
       it "redirects to the created users_link_management" do
         post users_link_managements_url, params: { users_link_management: valid_attributes }
-        expect(response).to redirect_to(users_link_management_url(@users_link_management))
+        expect(response).to redirect_to(users_link_management_url(@link))
       end
     end
 
