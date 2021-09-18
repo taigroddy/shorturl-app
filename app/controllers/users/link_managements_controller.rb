@@ -17,38 +17,41 @@ module Users
 
     def edit; end
 
+    # rubocop:disable Metrics/MethodLength
     def create
-      @link = Link.create(link_params)
+      ::Users::Links::CreateService.call(parameters.merge(user: current_user)) do |operation|
+        operation.success do |data|
+          @link = data
+          redirect_to links_path, notice: "Link management was successfully created."
+        end
 
-      respond_to do |format|
-        if @link.errors.blank?
-          format.html { redirect_to links_path, notice: "Link management was successfully created." }
-          format.json { render :index, status: :ok, links: resources }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @link.errors, status: :unprocessable_entity }
+        operation.failure do |errors|
+          @link = Link.new
+          @errors = build_errors_message(errors)
+          render :new, status: :unprocessable_entity
         end
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     def update
-      respond_to do |format|
-        if @link.update(link_params)
-          format.html { redirect_to links_path, notice: "Link management was successfully updated." }
-          format.json { render :index, status: :ok, links: resources }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @link.errors, status: :unprocessable_entity }
+      ::Users::Links::UpdateService.call(parameters.merge(resource: @link)) do |operation|
+        operation.success do |data|
+          @link = data
+          redirect_to links_path, notice: "Link management was successfully created."
+        end
+
+        operation.failure do |errors|
+          @errors = build_errors_message(errors)
+          render :edit, status: :unprocessable_entity
         end
       end
     end
 
     def destroy
       @link.destroy
-      respond_to do |format|
-        format.html { redirect_to links_url, notice: "Link management was successfully destroyed." }
-        format.json { head :no_content }
-      end
+
+      redirect_to links_url, notice: "Link management was successfully destroyed."
     end
 
     def redirect
@@ -69,10 +72,6 @@ module Users
 
     def set_link
       @link = resources.find(params[:id])
-    end
-
-    def link_params
-      params.fetch(:link, {}).permit(:name, :original_url).merge({ user: current_user })
     end
   end
 end

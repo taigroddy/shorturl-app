@@ -33,12 +33,23 @@ gem 'devise', '~> 4.8'
 gem 'jsonapi-serializer', '~> 2.0'
 gem 'pagy', '~> 4.11'
 
+# Dry suites gems
+gem 'dry-initializer', '~> 3.0'
+gem 'dry-transaction', '~> 0.13'
+gem 'dry-validation', '~> 1.6'
+
+# Additionnal Rails generator for contracts, services
+gem 'itamigan', git: 'https://github.com/ayann/Itamigan'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # rspec-rails is a testing framework for Rails 5+.
   gem 'rspec-rails', '~> 4.0'
+  # Generate sample
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'faker', '~> 2.19'
 end
 
 group :development do
@@ -61,6 +72,8 @@ group :development do
 end
 
 group :test do
+  # Clean your Mongoid databases with Database Cleaner.
+  gem 'database_cleaner-mongoid'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'

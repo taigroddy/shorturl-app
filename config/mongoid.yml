@@ -30,28 +30,6 @@ development:
       hosts:
         - <%= ENV.fetch('DATABASE_HOST') { 'db' } %>:<%= ENV.fetch('DATABASE_PORT') { 27017 } %>
       options:
-        # Note that all options listed below are Ruby driver client options (the mongo gem).
-        # Please refer to the driver documentation of the version of the mongo gem you are using
-        # for the most up-to-date list of options.
-        #
-        # Change the default write concern. (default = { w: 1 })
-        # write:
-        #   w: 1
-
-        # Change the default read preference. Valid options for mode are: :secondary,
-        # :secondary_preferred, :primary, :primary_preferred, :nearest
-        # (default: primary)
-        # read:
-        #   mode: :secondary_preferred
-        #   tag_sets:
-        #     - use: web
-
-        # The name of the user for authentication.
-        user: <%= ENV.fetch('DATABASE_USERNAME') { 'shorturl_app_db' } %>
-
-        # The password of the user for authentication.
-        password: <%= ENV.fetch('DATABASE_PASSWORD') { 'shorturl_app_db' } %>
-
         # The user's database roles.
         # roles:
         #   - 'dbOwner'
@@ -178,7 +156,7 @@ test:
     default:
       database: <%= ENV.fetch('DATABASE_NAME_TEST') { 'shorturl_app_db_test' } %>
       hosts:
-        - <%= ENV.fetch('DATABASE_HOST') { 'db' } %>:<%= ENV.fetch('DATABASE_PORT') { 27017 } %>
+        - <%= ENV.fetch('DATABASE_HOST') { 'shorturl_app_db_test' } %>:<%= ENV.fetch('DATABASE_PORT') { 27017 } %>
       options:
         read:
           mode: :primary

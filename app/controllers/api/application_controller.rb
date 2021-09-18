@@ -1,5 +1,5 @@
 module Api
-  class BaseController < ActionController::API
+  class ApplicationController < ActionController::API
     include Pagy::Backend
     include Serializable
 
@@ -27,6 +27,10 @@ module Api
       @current_user ||= User.find_by(api_key: api_key)
     rescue StandardError
       json_error_response('You can not access this page! Api key is wrong!')
+    end
+
+    def parameters
+      request.parameters
     end
   end
 end

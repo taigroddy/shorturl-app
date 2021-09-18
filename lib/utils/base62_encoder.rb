@@ -8,7 +8,7 @@ module Utils
     ALPHANUMERIC = [*'a'..'z', *'0'..'9', *'A'..'Z'].freeze
 
     def from_base10(num_to_convert, num_of_char = 7)
-      return nil unless num_to_convert.is_a?(Integer) || num_to_convert.negative?
+      return nil unless num_to_convert.is_a?(Integer) || num_to_convert.to_i.negative?
 
       choose(ALPHANUMERIC, num_of_char, num_to_convert)
     end
@@ -17,7 +17,7 @@ module Utils
     # Clone and custom function choose of Securerandom
     # See more in https://github.com/ruby/securerandom/blob/master/lib/securerandom.rb#L264
     ##
-    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def choose(chars, num_of_char, num_to_convert)
       size = limit = chars.size
       m = 1
@@ -48,6 +48,6 @@ module Utils
 
       result
     end
-    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
   end
 end

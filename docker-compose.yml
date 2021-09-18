@@ -20,8 +20,6 @@ services:
       - PORT=3004
       - DATABASE_HOST=db
       - DATABASE_NAME=shorturl_app_db
-      - DATABASE_USERNAME=shorturl_app_db
-      - DATABASE_PASSWORD=shorturl_app_db
       - RACK_ENV=development
       - RAILS_ENV=development
       - REDIS_HOST=redis
@@ -40,18 +38,15 @@ services:
       - traefik
   
   db:
-    image: bitnami/mongodb
-    container_name: shorturl-app-db
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MONGODB_USERNAME=shorturl_app_db
-      - MONGODB_PASSWORD=shorturl_app_db
-      - MONGODB_DATABASE=shorturl_app_db
+    image: mongo:latest
+    container_name: shorturl_app_db
+    volumes:
+      - mongodb_data:/data/db
     ports:
       - 27017:27017
     networks:
       - traefik
-  
+
 networks:
   traefik:
     external:
@@ -59,5 +54,6 @@ networks:
 
 volumes:
   cache:
+  mongodb_data:
 
 
