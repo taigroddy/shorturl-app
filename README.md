@@ -1,5 +1,5 @@
 ## What I did do
-I finished to create the app for short URL with base 62 and rails.
+I finished to create the app for short URL with base 62, mongodb and rails (You can find the algorithm used in references).
 
 The APIs **get the user's links** and  **create short URL** by Api key works well.
 
@@ -28,9 +28,11 @@ You need to create a account in UI and login to get Api key (Api-key). Then, you
 Api-key: BAh7BzoKZW1haWxJIhp0YWkuY2hhdUBzc3RlY2h2bi5jb20GOgZFVDoRZ2VuZXJhdGVkX2F0SXU6CVRpbWUNaWIegL+QClcKOg1uYW5vX251bWkCHAE6DW5hbm9fZGVuaQY6DXN1Ym1pY3JvIgcoQDoLb2Zmc2V0aQA6CXpvbmVJIghVVEMGOwZG--9a243cd6efbe4c45c9ca9f2d78f8dfdd
 ``
 
-
 ## What need to improve
  - UI responsive
+
+## References
+[Short URL by base 62 - Technique 2 — Short urls from base conversion](https://medium.com/@sandeep4.verma/system-design-scalable-url-shortener-service-like-tinyurl-106f30f23a82) 
  
 ## Screenshot
 ![UI login](github-screenshot/ui-login.png)
