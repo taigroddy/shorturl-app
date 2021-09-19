@@ -13,13 +13,18 @@ body {
   }
 
   .container {
-    .row > div {
-      background: white;
-      border-radius: 5px;
-      margin-top: 20px;
+    .row { 
+      > div {
+        background: white;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      .modal {
+        background: transparent;
+      }
     }
   }
-  
+
   .line-througn {
     margin: 10px 0px;
     font-size: 18px;
@@ -40,5 +45,39 @@ body {
         top: calc(50% - 1px);
         right: 0px;
     }
+  }
+
+  code {
+    &.copy-to-clipboard {
+      cursor: pointer;
+      position: relative;
+      .notice {
+        padding: 6px 10px;
+        border: none;
+        background: transparent;
+        position: absolute;
+        z-index: 10000;
+        width: 200px;
+        font-size: 12px;
+        color: #848484;
+      }
+      .code-content {
+        padding: 25px 10px 15px 10px;
+      }
+    }
+    .code-content {
+      margin: 0px;
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid gray;
+      background: #f1f1f1;
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+  }
+
+  .center-container {
+    margin-right: auto !important;
+    margin-left: auto !important;
   }
 }

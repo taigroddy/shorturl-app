@@ -24,3 +24,16 @@ require('datatables.net-autofill-bs4')
 require('datatables.net-buttons-bs4')
 require('datatables.net-fixedcolumns-bs4')
 require('datatables.net-fixedheader-bs4')
+
+document.addEventListener("turbolinks:load", function() {
+  $('.data-table').DataTable({
+      order: [
+          [0, 'desc']
+      ],
+      paging: false,
+      autoWidth: true,
+      searching: false
+  });
+})
+
+require('./custom')

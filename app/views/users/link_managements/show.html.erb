@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_link_path(@link) %> |
-<%= link_to 'Back', root_path %>
+<div class="col-md-6 links center-container">
+  <div class="card">
+    <div class="card-body">
+      <p><%= link_to 'Back', :back %></p>
+      <p><b>Name:</b> <%= @link.name %></p>
+      <p><b>Original URL:</b> <%= @link.original_url %></p>
+      <p><b>Short URL:</b> <%= link_to @link.short_url, @link.short_url %></p>
+    </div>
+    <div class="float-right text-right pr-2"><%= generate_actions(@link) %></div>
+  </div>
+</div>

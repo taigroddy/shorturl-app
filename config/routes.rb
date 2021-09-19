@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   get '/:short_path', to: 'users/link_managements#redirect',
                       as: :redirect_original,
-                      constraints: ->(request) { (NUM_OF_SHORT_URL_CHAR - request.params[:short_path].length).zero? }
+                      constraints: ->(request) { request.params[:short_path].length >= NUM_OF_SHORT_URL_CHAR }
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

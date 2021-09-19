@@ -14,6 +14,7 @@
     <div class="container">
       <div class="row">
         <%= yield %>
+        <%= render 'layouts/action-button' if current_user.present? %>
       </div>
     </div>
   </body>
